@@ -38,11 +38,11 @@ class Folder {
     static createDocFolderElement(folder) {
         const docMain = document.createElement("label");
         docMain.classList.add("folder-radio-representation-label");
-        docMain.setAttribute("for", folder.id.toString());
+        //docMain.setAttribute("for", folder.id.toString());
 
         const docInputRadio = document.createElement("input");
         docInputRadio.setAttribute("type", "radio");
-        docInputRadio.setAttribute("id", folder.id.toString());
+        //docInputRadio.setAttribute("id", folder.id.toString());
         docInputRadio.setAttribute("name", "folder");
         docInputRadio.classList.add("folder-radio");
 
@@ -82,11 +82,11 @@ class Task {
 
         const docLabel = document.createElement("label");
         docLabel.classList.add("todo-checkbox-representation-label");
-        docLabel.setAttribute("for", task.id.toString());
+        //docLabel.setAttribute("for", task.id.toString());
 
         const docLabelCheckbox = document.createElement("input");
         docLabelCheckbox.setAttribute("type", "checkbox");
-        docLabelCheckbox.setAttribute("id", task.id.toString());
+        //docLabelCheckbox.setAttribute("id", task.id.toString());
         docLabelCheckbox.classList.add("checkbox-input");
 
         const docLabelSpan = document.createElement("span");
