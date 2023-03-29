@@ -20,14 +20,14 @@ body {
 }
 
 .effect-hover {
-    transition: background 0.15s;
+    transition: background 0.25s;
 }
 
     .effect-hover:hover {
         background-color: #eee;
     }
 
-.effect-chose {
+.effect-chosen {
     background-color: #eee;
 }
 

@@ -15,17 +15,15 @@ class UniqueGen {
 }
 
 class Folder {
-    constructor(name, idGenerator) {
+    constructor(name) {
         this.name = name;
         this.tasks = [];
-        this.idgen = idGenerator;
-        this.id = this.idgen.getUnique();
         this.doc = Folder.createDocFolderElement(this);
     }
 
     //Adds new task to folader array and returns added task;
-    addTask(text) {
-        let newTask = new Task(text, this.idgen.getUnique());
+    addTask(text, isComplited = false) {
+        let newTask = new Task(text, isComplited);
         this.tasks.push(newTask);
         return newTask;
     }
@@ -33,6 +31,46 @@ class Folder {
     //Removes <task> from the array of tasks if it exists there
     removeTask(task) {
         this.tasks = this.tasks.filter(el => el != task);
+    }
+
+    saveToLocalStorage() {
+        let objTasks = [];
+        for (let j = 0; j < this.tasks.length; j++) {
+            objTasks.push({
+                text: this.tasks[j].text,
+                isCompleted: this.tasks[j].isCompleted,
+            });
+        }
+
+        let objFolder = {
+            name: this.name,
+            tasks: objTasks,
+        }
+        localStorage.setItem(Folder.lsPrefix + this.name, JSON.stringify(objFolder));
+    }
+
+    static lsPrefix = "f";
+    static createFromLocalStorage(name) {
+        let objFolder = JSON.parse(localStorage.getItem(name));
+        if (objFolder) {
+            let folder = new Folder(objFolder.name);
+            for (let i = 0; i < objFolder.tasks.length; i++) {
+                let newTask = folder.addTask(objFolder.tasks[i].text, objFolder.tasks[i].isCompleted);
+                newTask.doc.crossButton.addEventListener("click", (event) => {
+                    docTaskList.removeChild(newTask.doc.main);
+                    folder.removeTask(newTask);
+                    folder.saveToLocalStorage();
+                });
+
+                newTask.doc.checkbox.addEventListener('change', (event) => {
+                    newTask.isCompleted = !newTask.isCompleted;
+                    folder.saveToLocalStorage();
+                });
+
+            }
+            return folder;
+        } else
+            return undefined;
     }
 
     static createDocFolderElement(folder) {
@@ -58,6 +96,7 @@ class Folder {
 
         return {
             main: docMain,
+            radio: docInputRadio,
         };
     }
 
@@ -65,10 +104,9 @@ class Folder {
 }
 
 class Task {
-    constructor(text, id) {
+    constructor(text, isCompleted = false) {
         this.text = text;
-        this.id = id;
-        this.isCompleted = false;
+        this.isCompleted = isCompleted;
         this.doc = Task.createDocListElement(this);
 
     }
@@ -86,6 +124,8 @@ class Task {
 
         const docLabelCheckbox = document.createElement("input");
         docLabelCheckbox.setAttribute("type", "checkbox");
+        if (task.isCompleted)
+            docLabelCheckbox.setAttribute("checked", "");
         //docLabelCheckbox.setAttribute("id", task.id.toString());
         docLabelCheckbox.classList.add("checkbox-input");
 
