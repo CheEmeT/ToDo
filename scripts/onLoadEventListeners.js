@@ -5,10 +5,17 @@ for (let i = 0; i < folders.length; i++) {
     docFolders.appendChild(folders[i].doc.main);
 }
 
+document.querySelector("body").addEventListener("keydown", (event) => {
+    console.log(event.key);
+    if (event.altKey && event.key === 'c') {
+        localStorage.clear();
+    }
+})
+
 
 
 docTaskTextInput.addEventListener("keydown", (event) => {
-    //console.log(event.keyCode);
+    console.log(event.keyCode);
     if (event.keyCode === 13 && docTaskTextInput.value.length > 0) {
         if (!currentFolder) {
             if (folders.length === 0) {
