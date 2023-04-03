@@ -1,9 +1,8 @@
 
-const docTaskList = document.querySelector(".todo-list-ul");
-const docFolders = document.querySelector(".section-folders");
-const docTaskTextInput = document.querySelector(".input-todo");
+const docTaskList = document.querySelector(".tasks-list");
+const docFolders = document.querySelector(".folder-area");
+const docTaskTextInput = document.querySelector(".input-text");
 
-const idGenerator = new UniqueGen();
 let folders = [];
 let currentFolder;
 
@@ -46,7 +45,7 @@ function addFolder(folder) {
 	if (!folder) {
 		return;
 	}
-	if (!folders.find(inFolder => inFolder === folder)) {
+	if (!folders.find(inFolder => inFolder.name === folder.name)) {
 		folders.push(folder);
 		docFolders.appendChild(folder.doc.main);
 		folder.doc.main.addEventListener("click", (event) => {

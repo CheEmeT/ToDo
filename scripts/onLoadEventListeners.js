@@ -6,16 +6,13 @@ for (let i = 0; i < folders.length; i++) {
 }
 
 document.querySelector("body").addEventListener("keydown", (event) => {
-    console.log(event.key);
+    //console.log(event.key);
     if (event.altKey && event.key === 'c') {
         localStorage.clear();
     }
 })
 
-
-
 docTaskTextInput.addEventListener("keydown", (event) => {
-    console.log(event.keyCode);
     if (event.keyCode === 13 && docTaskTextInput.value.length > 0) {
         if (!currentFolder) {
             if (folders.length === 0) {
@@ -29,6 +26,7 @@ docTaskTextInput.addEventListener("keydown", (event) => {
         let newTask = currentFolder.addTask(docTaskTextInput.value);
         currentFolder.saveToLocalStorage();
         docTaskList.appendChild(newTask.doc.main);
+
         newTask.doc.crossButton.addEventListener("click", (event) => {
             docTaskList.removeChild(newTask.doc.main);
             currentFolder.removeTask(newTask);

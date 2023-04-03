@@ -1,63 +1,50 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en-us">
 <head>
     <meta name="author" content="CheEmeT" />
     <meta name="description" content="My attempt to create usefull todo manager." />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Setting up an image to display in title-->
     <link rel="icon" href="favicon.png" type="image/x-icon" />
-   
-    <!-- Css stuff -->
     <link rel="stylesheet" href="styles/style.css" />
-    <link rel="stylesheet" href="styles/section-input.css" />
-    <link rel="stylesheet" href="styles/working-area.css" />
 
-    <!-- Using fonts from google's font api-->
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:italic,bold" />-->
-
-    <!-- Scripts -->
     <script src="scripts/classes.js" defer></script>
-    <script src="scripts/script.js" defer></script>
+    <script src="scripts/main.js" defer></script>
     <script src="scripts/onLoadEventListeners.js" defer></script>
 
-    <title>To do list</title>
+    <title>ToDo list</title>
 </head>
 <body>
-    <div class="page-div">
-        <section class="section-input">
-            <div class="section-input-prefix-div effect-hover" src="images/pointer.png" draggable="false">
-                <span class="section-input-prefix-span">&#10093;</span>
-            </div>
-            <input type="text" class="input-todo" placeholder="Write your task here" />
-            <footer class="section-footer">
-                <p class="section-footer-p">Double click to edit task</p>
-                <p class="section-footer-p">Click to open subtasks</p>
-                <p class="section-footer-p">Alt + c to clear local storage</p>
-            </footer>
+    <div class="main-container">
+        <section class="input-area">
+            <input type="text" class="input-text" placeholder="Write your task" />
         </section>
-        <div class="working-area-div">
-            <section class="section-folders">
-                <!--Example of folder-->
-                <!--<label class="folder-radio-representation-label" for="abc">
-                    <input type="radio" class="folder-radio" name="folder" id="abc" />
-                    <span class="folder-radio-representation-span effect-hover">Example</span>
+        <section class="working-area">
+            <div class="folder-area">
+                <!--Folder example-->
+                <!--<label class="folder-label">
+                    <input type="radio" class="folder-radio" name="folder"/>
+                    <span class="folder-span">Text</span>
+                    <input type="button" class="folder-close" value="&#10006;"/>
                 </label>-->
-            </section>
-            <div class="todo-list-div">
-                <ul class="todo-list-ul">
+            </div>
+            <div class="tasks-area">
+                <ul class="tasks-list">
+                    <!--Task example-->
                     <!--<li>
-                        <label class="todo-checkbox-representation-label" for="123">
-                            <input class="checkbox-input" type="checkbox" id="123" />
-                            <span class="todo-checkbox-representation-span"></span>
+                        <label class="task-label">
+                            <input type="checkbox" class="task-checkbox" />
+                            <span class="task-span"></span>
                         </label>
-                        <span class="todo-task-span">example</span>
-                        <input type="button" class="todo-task-remove-button" value="&#10006;"/>
+                        <label class="task-text">TaskText-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</label>
+                        <input type="button" class="task-close" value="&#10006;" />
                     </li>-->
                 </ul>
+
             </div>
-        </div>
+        </section>
     </div>
 </body>
+
 </html>

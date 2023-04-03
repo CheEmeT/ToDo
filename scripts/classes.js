@@ -1,19 +1,3 @@
-class UniqueGen {
-    currentState;
-    constructor() {
-        this.currentState = 0x0;
-    }
-
-    getUnique() {
-        this.currentState++;
-        return this.currentState;
-    }
-
-    reset() {
-        this.currentState = 0;
-    }
-}
-
 class Folder {
     constructor(name) {
         this.name = name;
@@ -46,6 +30,7 @@ class Folder {
             name: this.name,
             tasks: objTasks,
         }
+
         localStorage.setItem(Folder.lsPrefix + this.name, JSON.stringify(objFolder));
     }
 
@@ -75,17 +60,15 @@ class Folder {
 
     static createDocFolderElement(folder) {
         const docMain = document.createElement("label");
-        docMain.classList.add("folder-radio-representation-label");
-        //docMain.setAttribute("for", folder.id.toString());
+        docMain.classList.add("folder-label");
 
         const docInputRadio = document.createElement("input");
         docInputRadio.setAttribute("type", "radio");
-        //docInputRadio.setAttribute("id", folder.id.toString());
         docInputRadio.setAttribute("name", "folder");
         docInputRadio.classList.add("folder-radio");
 
         const docSpan = document.createElement("span");
-        docSpan.classList.add("folder-radio-representation-span", "effect-hover");
+        docSpan.classList.add("folder-span", "effect-hover");
 
         const docSpanText = document.createTextNode(folder.name);
 
@@ -119,7 +102,7 @@ class Task {
         const docLi = document.createElement("li")
 
         const docLabel = document.createElement("label");
-        docLabel.classList.add("todo-checkbox-representation-label");
+        docLabel.classList.add("task-label");
         //docLabel.setAttribute("for", task.id.toString());
 
         const docLabelCheckbox = document.createElement("input");
@@ -127,24 +110,24 @@ class Task {
         if (task.isCompleted)
             docLabelCheckbox.setAttribute("checked", "");
         //docLabelCheckbox.setAttribute("id", task.id.toString());
-        docLabelCheckbox.classList.add("checkbox-input");
+        docLabelCheckbox.classList.add("task-checkbox");
 
         const docLabelSpan = document.createElement("span");
-        docLabelSpan.classList.add("todo-checkbox-representation-span");
+        docLabelSpan.classList.add("task-span");
 
         docLabel.append(docLabelCheckbox, docLabelSpan);
 
-        const docSpan = document.createElement("span");
-        docSpan.classList.add("todo-task-span");
+        const docTextLabel = document.createElement("span");
+        docTextLabel.classList.add("task-text");
         const docSpanText = document.createTextNode(task.text);
-        docSpan.append(docSpanText);
+        docTextLabel.append(docSpanText);
 
         const docButton = document.createElement("input");
         docButton.setAttribute("type", "button");
         docButton.setAttribute("value", "\u2716");
-        docButton.classList.add("todo-task-remove-button");
+        docButton.classList.add("task-close");
 
-        docLi.append(docLabel, docSpan, docButton);
+        docLi.append(docLabel, docTextLabel, docButton);
 
         return {
             main: docLi,
