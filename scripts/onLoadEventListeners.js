@@ -1,6 +1,9 @@
 
-loadFromLocalStorage();
-
+try {
+    loadFromLocalStorage();
+} catch (exception) {
+    console.warn("Something is wrong with loading local storage. Try to clear it or figure out what is going on by your self.")
+}
 for (let i = 0; i < folders.length; i++) {
     docFolders.appendChild(folders[i].doc.main);
 }

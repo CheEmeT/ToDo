@@ -98,15 +98,12 @@ function loadFromLocalStorage() {
 				addFolder(folder);
 			}
 		}
-	}
+    }
 
-	let objCurrentFolder = localStorage.getItem("currentFolder");
-	if (objCurrentFolder) {
-		objCurrentFolder = JSON.parse(objCurrentFolder);
-		if (objCurrentFolder) {
-			changeFolder(folders[objCurrentFolder]);
-			currentFolder.doc.radio.setAttribute("checked", "");
-		}
-	}
+    let objCurrentFolder = localStorage.getItem("currentFolder");
+    if (objCurrentFolder) {
+        changeFolder(folders[JSON.parse(objCurrentFolder)]);
+        currentFolder.doc.radio.setAttribute("checked", "");
+    }
 }
 
