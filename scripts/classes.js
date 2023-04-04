@@ -117,7 +117,7 @@ class Task {
 
         docLabel.append(docLabelCheckbox, docLabelSpan);
 
-        const docTextLabel = document.createElement("span");
+        const docTextLabel = document.createElement("label");
         docTextLabel.classList.add("task-text");
         const docSpanText = document.createTextNode(task.text);
         docTextLabel.append(docSpanText);
