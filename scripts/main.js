@@ -6,17 +6,11 @@ const docTaskTextInput = document.querySelector(".input-text");
 let folders = [];
 let currentFolder;
 
-//addFolder(new Folder("Tasks", idGenerator));
-//addFolder(new Folder("Shopping", idGenerator));
-//addFolder(new Folder("Cleaning", idGenerator));
-//addFolder(new Folder("Work", idGenerator));
-
 //Tasks' representation
 function clearDocTasks() {
 	while (docTaskList.firstChild) {
 		docTaskList.removeChild(docTaskList.lastChild);
 	}
-
 }
 
 function fillDocTasksFromFolder(folder) {
@@ -31,6 +25,7 @@ function changeFolder(folder) {
 	if (!folder) {
 		clearDocTasks();
 		currentFolder = null;
+		console.log("And here too");
 	}
 	if (currentFolder !== folder) {
 		clearDocTasks();
@@ -47,10 +42,16 @@ function addFolder(folder) {
 	}
 	if (!folders.find(inFolder => inFolder.name === folder.name)) {
 		folders.push(folder);
+
 		docFolders.appendChild(folder.doc.main);
 		folder.doc.main.addEventListener("click", (event) => {
 			changeFolder(folder);
 		})
+
+		folder.doc.cross.addEventListener("click", (event) => {
+			removeFolder(folder);
+			event.stopPropagation();
+		});
 
 		// localStorage
 		folder.saveToLocalStorage();
@@ -72,17 +73,18 @@ function removeFolder(folder) {
 	}
 	folders = folders.filter(fl => fl !== folder);
 	docFolders.removeChild(folder.doc.main);
+	
 	if (currentFolder === folder) {
 		if (folders.length > 0) {
 			changeFolder(folders[0]);
 		} else {
 			changeFolder(null);
-			clearDocTasks();
+			console.log("Executed");
 		}
 	}
 
 	//localStorage
-	localStorage.removeItem(Folder.lsPrefix + folder.name);
+	folder.removeFromLocalStorage();
 	refreshFoldersHeader();
 }
 
@@ -100,8 +102,11 @@ function loadFromLocalStorage() {
 
 	let objCurrentFolder = localStorage.getItem("currentFolder");
 	if (objCurrentFolder) {
-		changeFolder(folders[JSON.parse(objCurrentFolder)]);
-		currentFolder.doc.radio.setAttribute("checked", "");
+		objCurrentFolder = JSON.parse(objCurrentFolder);
+		if (objCurrentFolder) {
+			changeFolder(folders[objCurrentFolder]);
+			currentFolder.doc.radio.setAttribute("checked", "");
+		}
 	}
 }
 

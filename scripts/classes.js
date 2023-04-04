@@ -34,6 +34,10 @@ class Folder {
         localStorage.setItem(Folder.lsPrefix + this.name, JSON.stringify(objFolder));
     }
 
+    removeFromLocalStorage() {
+        localStorage.removeItem(Folder.lsPrefix + this.name);
+    }
+
     static lsPrefix = "f";
     static createFromLocalStorage(name) {
         let objFolder = JSON.parse(localStorage.getItem(name));
@@ -74,12 +78,18 @@ class Folder {
 
         docSpan.appendChild(docSpanText);
 
-        docMain.append(docInputRadio, docSpan);
+        const docInputCross = document.createElement("input");
+        docInputCross.setAttribute("type", "button");
+        docInputCross.setAttribute("value", "\u2716");
+        docInputCross.classList.add("folder-close");
+
+        docMain.append(docInputRadio, docSpan, docInputCross);
 
 
         return {
             main: docMain,
             radio: docInputRadio,
+            cross: docInputCross,
         };
     }
 
