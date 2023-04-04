@@ -100,6 +100,7 @@ class Task {
     //  crossButton - button in the top-right corner
     static createDocListElement(task) {
         const docLi = document.createElement("li")
+        docLi.classList.add("effect-hover");
 
         const docLabel = document.createElement("label");
         docLabel.classList.add("task-label");
