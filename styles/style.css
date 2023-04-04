@@ -163,7 +163,6 @@ body{
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    flex-shrink: 0;
     
     position: relative;
     width: 90%;
@@ -177,8 +176,8 @@ body{
 
 .task-text{
     padding-right: 0.5em;
-    max-width: 100%;
-    line-break: anywhere;    
+    max-width: 100%; 
+    word-break: break-word;
 }
 
 .task-checkbox{
